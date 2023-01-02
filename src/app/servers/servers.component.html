@@ -1,16 +1,35 @@
-<label>Server Name</label>
-<input 
-    type="text"
-    class="form-control"
-    (input)="onUpdateServerName($event)"/>
-<p>{{ serverName }}</p>
-<button 
-    type="button"
-    class="btn btn-success"
-    [disabled]="!allowNewServer"
-    (click)="onCreateServer()">
-    Add server
-</button>
-<p>{{serverCreationStatus}}</p>
-<app-server></app-server>
-<app-server></app-server>
+<div class="row">
+    <div class="form-group col-md-6">
+        <label class="form-control">Server Name</label>
+        <!-- <input 
+        type="text"
+        class="form-control"
+        (input)="onUpdateServerName($event)"/> -->
+        <input type="text" class="form-control" [(ngModel)]="serverName" />
+        <!-- <p>{{ serverName }}</p> -->
+        <button type="button" class="btn btn-success" [disabled]="!allowNewServer" (click)="onCreateServer()">
+            Add server
+        </button>
+        <!-- <p>{{serverCreationStatus}}</p> -->
+        <!-- <p *ngIf="serverCreated; else noServer">Server was created. Server name is {{serverName}}</p>
+        <ng-template #noServer>
+            <p>
+                No Server was created!
+            </p>
+        </ng-template>    -->
+        <p *ngIf="serverCreated">Server was created. Server name is {{serverName}}</p>
+        <app-server *ngFor="let server of servers"></app-server>
+        <!-- <success-message></success-message> -->
+        <!-- <br> -->
+        <!-- <warning-message></warning-message> -->
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-6">
+        <button class="btn btn-success" (click)="toggleParagraph()">
+            Display Details
+        </button>
+        <p class="control-label" *ngIf="displayContent">Secret Password</p>
+    </div>
+</div>
